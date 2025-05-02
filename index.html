@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cek Kelulusan</title>
+  <link rel="icon" type="image/png" href="favicon.ico">
+  <meta property="og:title" content="Cek Kelulusan SMAN 1 Jember">
+  <meta property="og:description" content="Masukkan NISN Anda untuk mengecek status kelulusan.">
+  <meta property="og:image" content="thumbnail.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://urlnyapa.com">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="script.js" defer></script>
+  <style>
+    @keyframes popup {
+      0% {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    .animate-popup {
+      animation: popup 0.2s ease-out forwards;
+    }
+    .blurred-bg {
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+  </style>
+  
+</head>
+
+<body class="bg-[#f0f6ff] min-h-screen flex flex-col pt-[96px]">
+  <!-- Header -->
+  <header class="bg-blue-900 text-white px-4 py-3 flex flex-col md:flex-row items-start md:items-center justify-between fixed top-0 left-0 right-0 z-30 shadow-none">
+    <div class="flex items-center gap-4 mb-2 md:mb-0">
+      <img src="logosmasa.png" alt="SMA Negeri 1 Jember" class="w-10 h-auto md:w-10 md:h-auto">
+      <div>
+        <h1 class="text-lg md:text-xl font-bold">SMA NEGERI 1 JEMBER</h1>
+        <p class="text-sm md:text-base uppercase">Cek Kelulusan 2024/2025</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 flex items-center justify-center px-4 min-h-[60vh] flex-col">
+    <!-- Logo -->
+    <div class="mb-6 flex justify-center -mt-20">
+      <img src="logosmasa.png" alt="Logo SMAN 1 Jember" class="w-20 md:w-25 h-auto">
+    </div>
+    <!-- Form Check -->
+    <div class="bg-white rounded-xl shadow-lg p-6 w-full max-w-xl">
+      <h2 class="text-xl md:text-2xl font-bold text-blue-700 text-center uppercase mb-4">Cek Status Kelulusan</h2>
+      <label for="searchInput" class="block text-sm font-semibold text-gray-700 text-center mb-1">
+        Masukkan NISN atau Nama Anda:
+      </label>
+      <input id="searchInput" type="text" placeholder="Contoh: 0065578099 atau Nama"
+        class="w-full p-3 text-gray-700 border border-gray-300 rounded-lg shadow-sm placeholder:text-gray-400 text-center transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:shadow-md">
+      <ul id="suggestions" class="bg-white border border-gray-200 rounded-lg mt-1 max-h-40 overflow-y-auto hidden z-10"></ul>
+      <button onclick="cekKelulusan()"
+        class="mt-4 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white text-lg font-semibold flex items-center justify-center gap-2 px-6 py-3 rounded-xl shadow-xl hover:shadow-[0_0_20px_rgba(59,130,246,0.6)] transition duration-300 ease-in-out w-full">
+        <i class="ph ph-magnifying-glass"></i> Cek Status
+      </button>
+    </div>
+  </main>
+
+  <!-- Popup Selamat Datang -->
+  <div id="welcomePopup" class="fixed inset-0 bg-black bg-opacity-40 blurred-bg z-40 flex items-center justify-center">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-xl w-[90%] p-6 text-center relative animate-popup">
+      <p class="text-black-700 text-md md:text-base leading-relaxed">
+        Selamat dan sukses kepada seluruh siswa-siswi <strong>SMA Negeri 1 Jember</strong> yang telah menyelesaikan pendidikan selama 3 tahun. Hari ini menjadi momen penting dalam perjalanan kalian. Semoga ilmu dan pengalaman selama di SMA menjadi bekal berharga untuk masa depan yang gemilang. Selamat atas kelulusan kalian!
+      </p>
+      <p class="mt-4 text-gray-600 italic">- Kepala Sekolah SMA Negeri 1 Jember</p>
+      <button onclick="document.getElementById('welcomePopup').classList.add('hidden')"
+        class="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold shadow-md transition">
+        Tutup
+      </button>
+    </div>
+  </div>
+
+  <!-- Popup Notif -->
+  <div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-20">
+    <div id="popupBox" class="bg-white p-6 rounded-2xl shadow-lg text-center relative animate-popup w-[90%] max-w-sm">
+      <div id="popupIcon" class="text-5xl mb-3"></div>
+      <h2 id="popupStatus" class="text-2xl font-bold mb-2"></h2>
+      <p id="popupMessage" class="mb-4"></p>
+      <button onclick="closePopup()"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Footer  -->
+  <footer class="bg-gray-900 text-white py-4 mt-auto w-full text-center text-xs">
+    <div class="px-2 space-y-2">
+      <p class="text-gray-300">
+        Jl. Letjen Panjaitan No. 55, Kec. Sumbersari, Kabupaten Jember, Jawa Timur
+      </p>
+      <p class="text-gray-400">&copy; SMA NEGERI 1 JEMBER 2025</p>
+    </div>
+  </footer>
+</body>
+
+<!-- Welcome End -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (sessionStorage.getItem("welcomeShown")) {
+      document.getElementById("welcomePopup").classList.add("hidden");
+    } else {
+      sessionStorage.setItem("welcomeShown", "true");
+    }
+  });
+</script>
+
+</html>
