@@ -66,8 +66,8 @@ function cekKelulusan() {
     popupMessage.textContent = 'Nama atau NISN tidak terdaftar.';
   } else if (siswa.status.toLowerCase() === 'lulus') {
     popupIcon.innerHTML = '<i class="ph ph-check-circle text-green-500"></i>';
-    popupStatus.textContent = '🎉 Selamat! 🎉';
-    popupMessage.innerHTML = `<strong>${siswa.nama}</strong><br>dinyatakan<br><strong>LULUS</strong>.`;
+    popupStatus.textContent = 'SELAMAT DAN SUKSES!';
+    popupMessage.innerHTML = `<strong>${siswa.nama}</strong><br>telah dinyatakan<br><strong>LULUS</strong><br>dari <strong>SMA NEGERI 1 JEMBER</strong><br><i>Semoga ilmu yang ditempuh menjadi bekal berharga untuk masa depan.</i>`;
   } else {
     popupIcon.innerHTML = '<i class="ph ph-x-circle text-red-500"></i>';
     popupStatus.textContent = '😢 Maaf 😢';
