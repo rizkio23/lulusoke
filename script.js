@@ -13,6 +13,7 @@ const searchInput = document.getElementById('searchInput');
 const suggestions = document.getElementById('suggestions');
 
 searchInput.addEventListener('input', () => {
+  searchInput.value = searchInput.value.replace(/\D/g, '');
   const keyword = searchInput.value.trim().toLowerCase();
   suggestions.innerHTML = '';
   if (keyword.length === 0) {
