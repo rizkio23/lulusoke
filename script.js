@@ -22,7 +22,7 @@ searchInput.addEventListener('input', () => {
 
   // DEBOUNCE CARI NIS DAN NAMA
   const matches = siswaData.filter(s => 
-    s.nama.toLowerCase().startsWith(keyword) || 
+    // s.nama.toLowerCase().startsWith(keyword) || 
     s.nisn.startsWith(keyword)
   );
   matches.slice(0, 5).forEach(s => {
