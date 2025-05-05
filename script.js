@@ -89,3 +89,12 @@ function closePopup() {
     popupBox.classList.remove('animate-popup-out');
   }, 200);
 }
+
+//RESET WELCOME MESSAGE
+document.addEventListener("DOMContentLoaded", () => {
+  if (sessionStorage.getItem("welcomeShown")) {
+    document.getElementById("welcomePopup").classList.add("hidden");
+  } else {
+    sessionStorage.setItem("welcomeShown", "true");
+  }
+});
