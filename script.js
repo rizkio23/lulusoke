@@ -62,7 +62,7 @@ function cekKelulusan() {
 
   if (!siswa) {
     popupIcon.innerHTML = '<i class="ph ph-x-circle text-red-500"></i>';
-    popupStatus.textContent = 'Data Tidak Ditemukan';
+    popupStatus.textContent = 'Data tidak ditemukan';
     popupMessage.textContent = 'Nama atau NISN tidak terdaftar.';
   } else if (siswa.status.toLowerCase() === 'lulus') {
     popupIcon.innerHTML = '<i class="ph ph-check-circle text-green-500"></i>';
@@ -70,8 +70,8 @@ function cekKelulusan() {
     popupMessage.innerHTML = `<strong>${siswa.nama}</strong><br>telah dinyatakan<br><strong>LULUS</strong><br>dari <strong>SMA NEGERI 1 JEMBER</strong><br><i>Semoga ilmu yang ditempuh menjadi bekal berharga untuk masa depan.</i>`;
   } else {
     popupIcon.innerHTML = '<i class="ph ph-x-circle text-red-500"></i>';
-    popupStatus.textContent = '😢 Maaf 😢';
-    popupMessage.innerHTML = `<strong>${siswa.nama}</strong><br>dinyatakan<br><strong>TIDAK LULUS</strong>.`;
+    popupStatus.textContent = 'MAAF';
+    popupMessage.innerHTML = `<strong>${siswa.nama}</strong><br>anda dinyatakan<br><strong>TIDAK LULUS</strong><br>dari <strong>SMA NEGERI 1 JEMBER</strong>.`;
   }
   // HAPUS FORM
   searchInput.value = '';
